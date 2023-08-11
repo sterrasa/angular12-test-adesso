@@ -1,0 +1,61 @@
+<main>
+  <button class="btn btn-primary addBtn" (click)="toggleForm()">
+    Add product
+  </button>
+  <form (submit)="createProduct()" *ngIf="visibleForm">
+    <div class="row">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input
+          [(ngModel)]="product.title"
+          name="title"
+          id="title"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <select
+          [(ngModel)]="product.category"
+          name="category"
+          id="category"
+          class="form-control"
+        >
+          <option value="electronic">Electronic</option>
+          <option value="jewelery">Jewelery</option>
+          <option value="men-clothing">Men's clothing</option>
+          <option value="women-clothing">Women's clothing</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea
+          [(ngModel)]="product.descritpion"
+          name="description"
+          id="description"
+          class="form-control"
+          rows="3"
+        ></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group text-center">
+        <input type="submit" class="btn btn-primary" />
+      </div>
+    </div>
+  </form>
+
+  <div class="products">
+    <div
+      *ngFor="let product of products | categoryFilter: 'jewelery'"
+      class="product"
+    >
+      <img loading="lazy" src="{{ product.image }}" width="180" />
+      <span>{{ product.title }}</span>
+    </div>
+  </div>
+</main>
